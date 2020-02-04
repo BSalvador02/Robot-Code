@@ -10,30 +10,9 @@ Function Move(Input = RandomNumber)
 {
 	If (SensorDistance < 10)
 	{
-TurnRight()
+        TurnRight();
 	}
-	Else
-	{
-		Generate another random number
-		Move(RandomNumber)
-	}
-	
-If (RandomNumber = 2 and rightSensorDistance >= 5)
-	{
-		TurnRight()
-MoveForward()
-	}
-	Else If (RandomNumber = 3 and leftSensorDistance >= 5)	
-{
-		TurnLeft()
-		MoveForward()
-	}
-	Else If (RandomNumber = 4 and leftSensorDistance >= 5)	
-	{
-		Reverse()
-		MoveForward()
-	}
-}
+
 
 Function TurnRight 
 {
