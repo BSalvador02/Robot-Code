@@ -3,12 +3,13 @@ To have a second motor, put vexMotor myVexMotor2;
  myVexMotor2.attach(10); // setup / attach the vexMotor onto pin 10
  Stop: input for both motors=0 
 /Create a code where if sensor detects an object, input value for one motor is 0 so it can turn
+/Pseudo cose starts below:
  
 SensorDistance = distance of closest object from front sensor
 SensorDistance = if distance is less than 10
 Function Move(Input = RandomNumber)
 {
-	If (SensorDistance < 10)
+	If (LeftSensorDistance < 10)
 	{
         TurnRight();
 	}
@@ -22,3 +23,36 @@ Function TurnRight
    RightMotor.write(0);
    LeftMotor.write(0);
  }
+ 
+{
+	If (RightSensorDistance < 10)
+	{
+	TurnLeft();
+	}
+	
+	
+Function TurnLeft
+{
+   RightMotor.write(100);
+   LeftMotor.write(-100);
+   Delay(1000x2);
+   RightMotor.write(0);
+   LeftMotor.write(0);
+ }
+
+{
+If (FrontDistance < 10)
+	{
+	MoveBack();
+	}
+	
+	
+Function TurnLeft
+{
+   RightMotor.write(-100);
+   LeftMotor.write(-100);
+   Delay(1000x2);
+   RightMotor.write(0);
+   LeftMotor.write(0);
+ }
+   
