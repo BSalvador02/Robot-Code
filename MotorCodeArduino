@@ -1,0 +1,20 @@
+MOTOR CONTROLLER 29  <-------->  ARDUINO
+ ============================================= 
+ WHITE (signal)           Digital pin 9
+ RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
+ BLACK (ground)           Ground (GND)                    
+
+vexMotor myVexMotor1;  // creates an instance of the vexMotor class
+// create an instance for each motor that is connected
+// to your device.
+
+void setup()
+{
+  myVexMotor1.attach(9); // setup / attach the vexMotor onto pin 9
+  Serial.begin(9600);    // starts the Serial communication on Arduino
+//sensor detection part of the code goes here
+}
+  // Set the speed of the motor. vexMotor.write() takes an input value from -255 to +255. 
+  // -255 is max speed reverse
+  myVexMotor1.write(inputValue);
+}
