@@ -23,3 +23,19 @@ void setup()
   // -255 is max speed reverse
   myVexMotor1.write(inputValue);
 }
+
+void loop()
+{
+	If (LeftSensorDistance < 10)
+	{
+  TurnRight();
+	}
+}
+ Function TurnRight 
+{
+   RightMotor.write(-100);
+   //LeftMotor.write(100);
+   Delay(1000x2);
+   RightMotor.write(0);
+   //LeftMotor.write(0);
+ }
