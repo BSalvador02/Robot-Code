@@ -1,9 +1,14 @@
+/*RobotCode
 MOTOR CONTROLLER 29  <-------->  ARDUINO
  ============================================= 
  WHITE (signal)           Digital pin 9
  RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
  BLACK (ground)           Ground (GND)                    
+*/
 
+#include <vexMotor.h> // includes the vexMotor library - uses Servo.h
+                      // -- do not #include <Servo.h> 
+                      
 vexMotor myVexMotor1;  // creates an instance of the vexMotor class
 // create an instance for each motor that is connected
 // to your device.
