@@ -5,6 +5,9 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
  RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
  BLACK (ground)           Ground (GND)                    
 */
+#define trigPin 13
+
+#define echoPin 12
 
 #include <vexMotor.h> // includes the vexMotor library - uses Servo.h
                       // -- do not #include <Servo.h> 
@@ -15,6 +18,10 @@ vexMotor myVexMotor1;  // creates an instance of the vexMotor class
 
 void setup()
 {
+  pinMode(trigPin, OUTPUT);
+
+  pinMode(echoPin, INPUT);
+
   myVexMotor1.attach(9); // setup / attach the vexMotor onto pin 9
   Serial.begin(9600);    // starts the Serial communication on Arduino
 //sensor detection part of the code goes here
@@ -38,4 +45,21 @@ void loop()
    Delay(1000x2);
    RightMotor.write(0);
    //LeftMotor.write(0);
+ }
+
+void SensorDistance
+{
+  digitalWrite(trigPin, LOW);
+
+  delayMicroseconds(2);
+
+  digitalWrite(trigPin, HIGH);
+
+  delayMicroseconds(10);
+
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+
+  distance = (duration/2) / 29.1;
  }
