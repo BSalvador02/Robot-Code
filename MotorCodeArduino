@@ -20,6 +20,7 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
                       // -- do not #include <Servo.h> 
                       
 vexMotor RightMotor;  // creates an instance of the vexMotor class
+vexMotor LeftMotor;
 // create an instance for each motor that is connected
 // to your device.
 
@@ -27,9 +28,21 @@ void setup()
 {
   pinMode(trigPinLeft, OUTPUT);
 
-  pinMode(echoPinLeft, INPUT);
+   pinMode(echoPinLeft, INPUT);
+  
+   pinMode(trigPinRight, OUTPUT);
 
+   pinMode(echoPinRight, INPUT);
+  
+   pinMode(trigPinFront, OUTPUT);
+
+   pinMode(echoPinFront, INPUT);
+  
+   pinMode(trigPinBack, OUTPUT);
+
+   pinMode(echoPinBack, INPUT);
   RightMotor.attach(rightMotorPin); // setup / attach the vexMotor onto rightMotorPin
+  LeftMotor.attach(leftMotorPin);
   Serial.begin(9600);    // starts the Serial communication on Arduino
 //sensor detection part of the code goes here
 }
@@ -46,10 +59,10 @@ void loop()
  void TurnRight() 
 {
    RightMotor.write(-100);
-   //LeftMotor.write(100);
+   LeftMotor.write(100);
    delay(1000*2);
    RightMotor.write(0);
-   //LeftMotor.write(0);
+   LeftMotor.write(0);
  }
 
 long SensorDistance(int SensorChoice)
