@@ -9,7 +9,7 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 
 #define echoPin 12
 
-#include <vexMotor.h> // includes the vexMotor library - uses Servo.h
+#include "vexMotor.h" // includes the vexMotor library - uses Servo.h
                       // -- do not #include <Servo.h> 
                       
 vexMotor RightMotor;  // creates an instance of the vexMotor class
@@ -31,7 +31,7 @@ void loop()
 {
   long LeftSensorDistance;
   LeftSensorDistance = SensorDistance(0);
-  If (LeftSensorDistance < 10)
+  if (LeftSensorDistance < 10)
   {
     TurnRight();
   }
@@ -40,7 +40,7 @@ void loop()
 {
    RightMotor.write(-100);
    //LeftMotor.write(100);
-   Delay(1000x2);
+   delay(1000*2);
    RightMotor.write(0);
    //LeftMotor.write(0);
  }
