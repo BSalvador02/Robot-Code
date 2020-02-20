@@ -13,24 +13,17 @@ Function Move(Input = RandomNumber)
 	{
         TurnRight();
 	}
-
-
-Function TurnRight 
-{
-   RightMotor.write(-100);
-   LeftMotor.write(100);
-   Delay(1000x2);
-   RightMotor.write(0);
-   LeftMotor.write(0);
- }
  
-{
 	If (RightSensorDistance < 10)
 	{
 	TurnLeft();
 	}
 	
-	
+	If (FrontDistance < 10)
+	{
+	MoveBack();
+	}
+}	
 Function TurnLeft
 {
    RightMotor.write(100);
@@ -40,13 +33,6 @@ Function TurnLeft
    LeftMotor.write(0);
  }
 
-{
-If (FrontDistance < 10)
-	{
-	MoveBack();
-	}
-	
-	
 Function MoveBack
 {
    RightMotor.write(-100);
@@ -56,3 +42,11 @@ Function MoveBack
    LeftMotor.write(0);
  }
    
+Function TurnRight 
+{
+   RightMotor.write(-100);
+   LeftMotor.write(100);
+   Delay(1000x2);
+   RightMotor.write(0);
+   LeftMotor.write(0);
+ }
