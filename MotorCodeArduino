@@ -18,6 +18,24 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 
 #include "vexMotor.h" // includes the vexMotor library - uses Servo.h
                       // -- do not #include <Servo.h> 
+
+enum direction{leftSensor, rightSensor, frontSensor, backSensor};
+
+const int motorSpeed = 100;
+
+const int motorDelayTime = 2; //seconds
+
+const int sensorDelayTime1 = 2; //seconds
+
+const int sensorDelayTime2 = 10; //seconds
+
+const int timeFactor = 1000000; //microseconds to seconds
+
+const int stop = 0;
+
+const int distanceThreshold = 10;
+
+const double durationToTime = 58.2;
                       
 vexMotor RightMotor;  // creates an instance of the vexMotor class
 vexMotor LeftMotor;
@@ -50,36 +68,73 @@ void setup()
 void loop()
 {
   long LeftSensorDistance;
-  LeftSensorDistance = SensorDistance(0);
-  if (LeftSensorDistance < 10)
+  long RightSensorDistance;
+  long FrontSensorDistance;
+  long BackSensorDistance;
+
+  FrontSensorDistance = SensorDistance(frontSensor);
+  if (FrontSensorDistance > distanceThreshold)
   {
-    TurnRight();
+     MoveForward();
+  }
+  else 
+  {
+     TurnLeft();
   }
 }
- void TurnRight() 
+
+void TurnRight() 
 {
-   RightMotor.write(-100);
-   LeftMotor.write(100);
-   delay(1000*2);
-   RightMotor.write(0);
-   LeftMotor.write(0);
- }
+   RightMotor.write(-motorSpeed);
+   LeftMotor.write(motorSpeed);
+   delayMicroseconds(timeFactor*motorDelayTime);
+   RightMotor.write(stop);
+   LeftMotor.write(stop);
+}
+
+void TurnLeft() 
+{
+   RightMotor.write(motorSpeed);
+   LeftMotor.write(-motorSpeed);
+   delayMicroseconds(timeFactor*motorDelayTime);
+   RightMotor.write(stop);
+   LeftMotor.write(stop);
+}
+
+void MoveBack() 
+{
+   RightMotor.write(-motorSpeed);
+   LeftMotor.write(-motorSpeed);
+   delayMicroseconds(timeFactor*motorDelayTime);
+   RightMotor.write(stop);
+   LeftMotor.write(stop);
+}
+
+void MoveForward() 
+{
+   RightMotor.write(motorSpeed);
+   LeftMotor.write(motorSpeed);
+   delayMicroseconds(timeFactor*motorDelayTime);
+   RightMotor.write(stop);
+   LeftMotor.write(stop);
+}
+
 
 long SensorDistance(int SensorChoice)
 {
   long duration, distance;
   digitalWrite(trigPinLeft, LOW);
 
-  delayMicroseconds(2);
+  delayMicroseconds(sensorDelayTime1);
 
   digitalWrite(trigPinLeft, HIGH);
 
-  delayMicroseconds(10);
+  delayMicroseconds(sensorDelayTime2);
 
   digitalWrite(trigPinLeft, LOW);
 
   duration = pulseIn(echoPinLeft, HIGH);
 
-  distance = (duration/2) / 29.1;
+  distance = duration/durationToTime;
   return distance;
 }
