@@ -73,7 +73,7 @@ void loop()
   double BackSensorDistance;
 
   FrontSensorDistance = SensorDistance(frontSensor);
-  if (FrontSensorDistance > distanceThreshold)
+  if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
   {
      MoveForward();
   }
