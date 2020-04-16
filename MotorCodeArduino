@@ -31,9 +31,9 @@ const int sensorDelayTime2 = 10; //seconds
 
 const int timeFactor = 1000000; //microseconds to seconds
 
-const int stop = 0;
+const int motorStop = 0; //motor speed stops
 
-const int distanceThreshold = 10;
+const double distanceThreshold = 10; //distance is in cm
 
 const double durationToTime = 58.2;
                       
@@ -67,10 +67,10 @@ void setup()
  
 void loop()
 {
-  long LeftSensorDistance;
-  long RightSensorDistance;
-  long FrontSensorDistance;
-  long BackSensorDistance;
+  double LeftSensorDistance;
+  double RightSensorDistance;
+  double FrontSensorDistance;
+  double BackSensorDistance;
 
   FrontSensorDistance = SensorDistance(frontSensor);
   if (FrontSensorDistance > distanceThreshold)
@@ -88,8 +88,8 @@ void TurnRight()
    RightMotor.write(-motorSpeed);
    LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(stop);
-   LeftMotor.write(stop);
+   RightMotor.write(motorStop);
+   LeftMotor.write(motorStop);
 }
 
 void TurnLeft() 
@@ -97,8 +97,8 @@ void TurnLeft()
    RightMotor.write(motorSpeed);
    LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(stop);
-   LeftMotor.write(stop);
+   RightMotor.write(motorStop);
+   LeftMotor.write(motorStop);
 }
 
 void MoveBack() 
@@ -106,8 +106,8 @@ void MoveBack()
    RightMotor.write(-motorSpeed);
    LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(stop);
-   LeftMotor.write(stop);
+   RightMotor.write(motorStop);
+   LeftMotor.write(motorStop);
 }
 
 void MoveForward() 
@@ -115,14 +115,14 @@ void MoveForward()
    RightMotor.write(motorSpeed);
    LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(stop);
-   LeftMotor.write(stop);
+   RightMotor.write(motorStop);
+   LeftMotor.write(motorStop);
 }
 
 
-long SensorDistance(int SensorChoice)
+double SensorDistance(int SensorChoice)
 {
-  long duration, distance;
+  double duration, distance;
   digitalWrite(trigPinLeft, LOW);
 
   delayMicroseconds(sensorDelayTime1);
@@ -137,4 +137,4 @@ long SensorDistance(int SensorChoice)
 
   distance = duration/durationToTime;
   return distance;
-}j
+}
