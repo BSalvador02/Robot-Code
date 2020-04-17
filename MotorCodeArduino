@@ -23,7 +23,7 @@ enum direction{leftSensor, rightSensor, frontSensor, backSensor};
 
 const int motorSpeed = 100;
 
-const int motorDelayTime = 2; //seconds
+const int motorDelayTime = 10; //seconds
 
 const int sensorDelayTime1 = 2; //seconds
 
