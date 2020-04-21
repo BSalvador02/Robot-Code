@@ -82,6 +82,15 @@ void loop()
      Stop();
      TurnLeft();
   }
+  if (FrontSensorDistance > distanceThreshold)
+  {
+     MoveForward();
+  }
+  else
+  {
+     Stop();
+     TurnRight();
+  }
 }
 
 void TurnRight() 
