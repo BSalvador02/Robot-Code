@@ -79,6 +79,7 @@ void loop()
   }
   else 
   {
+     Stop();
      TurnLeft();
   }
 }
@@ -119,6 +120,11 @@ void MoveForward()
    LeftMotor.write(motorStop);
 }
 
+void Stop()
+{
+   RightMotor.write(motorStop);
+   LeftMotor.write(motorStop);
+}
 
 double SensorDistance(int SensorChoice)
 {
