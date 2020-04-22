@@ -98,8 +98,6 @@ void TurnRight()
    RightMotor.write(-motorSpeed);
    LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
 }
 
 void TurnLeft() 
@@ -107,8 +105,6 @@ void TurnLeft()
    RightMotor.write(motorSpeed);
    LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
 }
 
 void MoveBack() 
@@ -116,8 +112,6 @@ void MoveBack()
    RightMotor.write(-motorSpeed);
    LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
 }
 
 void MoveForward() 
@@ -125,14 +119,13 @@ void MoveForward()
    RightMotor.write(motorSpeed);
    LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
-   RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
 }
 
 void Stop()
 {
    RightMotor.write(motorStop);
    LeftMotor.write(motorStop);
+   delayMicroseconds(timeFactor*motorDelayTime);
 }
 
 double SensorDistance(int SensorChoice)
