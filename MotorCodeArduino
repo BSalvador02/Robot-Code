@@ -23,7 +23,7 @@ enum direction{leftSensor, rightSensor, frontSensor, backSensor};
 
 const int motorSpeed = 100;
 
-const int motorDelayTime = 10; //seconds
+const int motorDelayTime = 2; //seconds
 
 const int sensorDelayTime1 = 2; //seconds
 
@@ -73,6 +73,9 @@ void loop()
   double BackSensorDistance;
 
   FrontSensorDistance = SensorDistance(frontSensor);
+  BackSensorDistance = SensorDistance(backSensor);
+  LeftSensorDistance = SensorDistance(leftSensor);
+  RightSensorDistance = SensorDistance(rightSensor);
   if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
   {
      MoveForward();
@@ -90,6 +93,19 @@ void loop()
   {
      Stop();
      TurnRight();
+  }
+  if (FrontSensorDistance > distanceThreshold)
+  {
+     MoveForward();
+  }
+  else
+  {
+      Stop();
+      MoveBack(); 
+  }
+  if (BackSensorDistance < distanceThreshold)
+  {
+     Stop();
   }
 }
 
