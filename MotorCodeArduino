@@ -21,7 +21,7 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 
 enum direction{leftSensor, rightSensor, frontSensor, backSensor};
 
-const int motorSpeed = 20;
+const int motorSpeed = 100;
 
 const int motorDelayTime = 1; //seconds
 
@@ -83,7 +83,7 @@ void loop()
      Serial.print("stop\n");
      Stop();
      Serial.print("turn left\n");
-     TurnLeft();
+     //TurnLeft();
   }
 }
 
@@ -125,17 +125,17 @@ void Stop()
 double SensorDistance(int SensorChoice)
 {
   double duration, distance;
-  digitalWrite(trigPinLeft, LOW);
+  digitalWrite(trigPinFront, LOW);
 
   delayMicroseconds(sensorDelayTime1);
 
-  digitalWrite(trigPinLeft, HIGH);
+  digitalWrite(trigPinFront, HIGH);
 
   delayMicroseconds(sensorDelayTime2);
 
-  digitalWrite(trigPinLeft, LOW);
+  digitalWrite(trigPinFront, LOW);
 
-  duration = pulseIn(echoPinLeft, HIGH);
+  duration = pulseIn(echoPinFront, HIGH);
 
   distance = duration/durationToTime;
   return distance;
