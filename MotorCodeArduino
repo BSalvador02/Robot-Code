@@ -103,44 +103,40 @@ void loop()
       Stop();
       MoveBack(); 
   }
-  if (BackSensorDistance < distanceThreshold)
-  {
-     Stop();
-  }
 }
 
 void TurnRight() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(motorSpeed);
+   LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
 }
 
 void TurnLeft() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(-motorSpeed);
+   LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
 }
 
 void MoveBack() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(-motorSpeed);
+   LeftMotor.write(motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
 }
 
 void MoveForward() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(motorSpeed);
+   LeftMotor.write(-motorSpeed);
    delayMicroseconds(timeFactor*motorDelayTime);
 }
 
 void Stop()
 {
    RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
+   LeftMotor.write(-motorStop);
    delayMicroseconds(timeFactor*motorDelayTime);
 }
 
