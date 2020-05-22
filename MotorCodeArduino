@@ -90,35 +90,35 @@ void loop()
 void TurnRight() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(motorSpeed);
+   LeftMotor.write(-motorSpeed);
    delay(timeFactor*motorDelayTime);
 }
 
 void TurnLeft() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(-motorSpeed);
+   LeftMotor.write(motorSpeed);
    delay(timeFactor*motorDelayTime);
 }
 
 void MoveBack() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(-motorSpeed);
+   LeftMotor.write(motorSpeed);
    delay(timeFactor*motorDelayTime);
 }
 
 void MoveForward() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(motorSpeed);
+   LeftMotor.write(-motorSpeed);
    delay(timeFactor*motorDelayTime);
 }
 
 void Stop()
 {
    RightMotor.write(motorStop);
-   LeftMotor.write(motorStop);
+   LeftMotor.write(-motorStop);
    delay(timeFactor*motorDelayTime);
 }
 
