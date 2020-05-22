@@ -5,10 +5,10 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
  RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
  BLACK (ground)           Ground (GND)                    
 */
-#define rightMotorPin 9
-#define leftMotorPin 10
 #define trigPinLeft 13
 #define echoPinLeft 12
+#define rightMotorPin 9
+#define leftMotorPin 10
 #define trigPinRight 8
 #define echoPinRight 7
 #define trigPinFront 6
@@ -21,15 +21,15 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 
 enum direction{leftSensor, rightSensor, frontSensor, backSensor};
 
-const int motorSpeed = 100;
+const int motorSpeed = 20;
 
-const int motorDelayTime = 2; //seconds
+const int motorDelayTime = 1; //seconds
 
-const int sensorDelayTime1 = 2; //seconds
+const int sensorDelayTime1 = 2; //microseconds 
 
-const int sensorDelayTime2 = 10; //seconds
+const int sensorDelayTime2 = 10; //microseconds
 
-const int timeFactor = 1000000; //microseconds to seconds
+const int timeFactor = 1000; //milliseconds to seconds
 
 const int motorStop = 0; //motor speed stops
 
@@ -73,71 +73,53 @@ void loop()
   double BackSensorDistance;
 
   FrontSensorDistance = SensorDistance(frontSensor);
-  BackSensorDistance = SensorDistance(backSensor);
-  LeftSensorDistance = SensorDistance(leftSensor);
-  RightSensorDistance = SensorDistance(rightSensor);
   if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
-  {
+  { 
+     Serial.print("move forward\n");
      MoveForward();
   }
   else 
   {
+     Serial.print("stop\n");
      Stop();
-     //TurnLeft(); 
-  }
-  if (FrontSensorDistance > distanceThreshold)
-  {
-     MoveForward();
-  }
-  else
-  {
-     Stop();
-     //TurnRight();
-  }
-  if (FrontSensorDistance > distanceThreshold)
-  {
-     MoveForward();
-  }
-  else
-  {
-      Stop();
-      //MoveBack(); 
+     Serial.print("turn left\n");
+     TurnLeft();
   }
 }
 
 void TurnRight() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(-motorSpeed);
-   delayMicroseconds(timeFactor*motorDelayTime);
+   LeftMotor.write(motorSpeed);
+   delay(timeFactor*motorDelayTime);
 }
 
 void TurnLeft() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(motorSpeed);
-   delayMicroseconds(timeFactor*motorDelayTime);
+   LeftMotor.write(-motorSpeed);
+   delay(timeFactor*motorDelayTime);
 }
 
 void MoveBack() 
 {
    RightMotor.write(-motorSpeed);
-   LeftMotor.write(motorSpeed);
-   delayMicroseconds(timeFactor*motorDelayTime);
+   LeftMotor.write(-motorSpeed);
+   delay(timeFactor*motorDelayTime);
 }
 
 void MoveForward() 
 {
    RightMotor.write(motorSpeed);
-   LeftMotor.write(-motorSpeed);
-   delayMicroseconds(timeFactor*motorDelayTime);
+   LeftMotor.write(motorSpeed);
+   delay(timeFactor*motorDelayTime);
 }
 
 void Stop()
 {
    RightMotor.write(motorStop);
-   LeftMotor.write(-motorStop);
-   delayMicroseconds(timeFactor*motorDelayTime);
+   LeftMotor.write(motorStop);
+   delay(timeFactor*motorDelayTime);
 }
 
 double SensorDistance(int SensorChoice)
@@ -157,4 +139,4 @@ double SensorDistance(int SensorChoice)
 
   distance = duration/durationToTime;
   return distance;
-}
+} 
