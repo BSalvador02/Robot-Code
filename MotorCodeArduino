@@ -83,7 +83,7 @@ void loop()
   else 
   {
      Stop();
-     TurnLeft();
+     //TurnLeft(); 
   }
   if (FrontSensorDistance > distanceThreshold)
   {
@@ -92,7 +92,7 @@ void loop()
   else
   {
      Stop();
-     TurnRight();
+     //TurnRight();
   }
   if (FrontSensorDistance > distanceThreshold)
   {
@@ -101,7 +101,7 @@ void loop()
   else
   {
       Stop();
-      MoveBack(); 
+      //MoveBack(); 
   }
 }
 
