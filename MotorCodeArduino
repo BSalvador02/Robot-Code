@@ -13,21 +13,6 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 #define echoPinRight 7
 #define trigPinFront 6
 #define echoPinFront 5
-#define trigPinBack 4/*RobotCode
-MOTOR CONTROLLER 29  <-------->  ARDUINO
- ============================================= 
- WHITE (signal)           Digital pin 9
- RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
- BLACK (ground)           Ground (GND)                    
-*/
-#define trigPinLeft 13
-#define echoPinLeft 12
-#define rightMotorPin 9
-#define leftMotorPin 10
-#define trigPinRight 8
-#define echoPinRight 7
-#define trigPinFront 6
-#define echoPinFront 5
 #define trigPinBack 4
 #define echoPinBack 3
 
@@ -38,7 +23,9 @@ enum direction{leftSensor, rightSensor, frontSensor, backSensor};
 
 const int motorSpeed = 100;
 
-const int motorDelayTime = 2; //seconds
+const int motorDelayTime = 1; //seconds
+
+const int motorDelayTimeTurn = 1500; //miliseconds
 
 const int sensorDelayTime1 = 2; //microseconds 
 
@@ -106,141 +93,14 @@ void TurnRight()
 {
    RightMotor.write(motorSpeed);
    LeftMotor.write(motorSpeed);
-   delay(timeFactor*motorDelayTime);
+   delay(motorDelayTimeTurn);
 }
 
 void TurnLeft() 
 {
    RightMotor.write(-motorSpeed);
    LeftMotor.write(-motorSpeed);
-   delay(timeFactor*motorDelayTime);
-}
-
-void MoveBack() 
-{
-   RightMotor.write(motorSpeed);
-   LeftMotor.write(-motorSpeed);
-   delay(timeFactor*motorDelayTime);
-}
-
-void MoveForward() 
-{
-   RightMotor.write(-motorSpeed);
-   LeftMotor.write(motorSpeed);
-   delay(timeFactor*motorDelayTime);
-}
-
-void Stop()
-{
-   RightMotor.write(-motorStop);
-   LeftMotor.write(motorStop);
-   delay(timeFactor*motorDelayTime);
-}
-
-double SensorDistance(int SensorChoice)
-{
-  double duration, distance;
-  digitalWrite(trigPinFront, LOW);
-
-  delayMicroseconds(sensorDelayTime1);
-
-  digitalWrite(trigPinFront, HIGH);
-
-  delayMicroseconds(sensorDelayTime2);
-
-  digitalWrite(trigPinFront, LOW);
-
-  duration = pulseIn(echoPinFront, HIGH);
-
-  distance = duration/durationToTime;
-  return distance;
-} 
-
-#define echoPinBack 3
-
-#include "vexMotor.h" // includes the vexMotor library - uses Servo.h
-                      // -- do not #include <Servo.h> 
-
-enum direction{leftSensor, rightSensor, frontSensor, backSensor};
-
-const int motorSpeed = 100;
-
-const int motorDelayTime = 1; //seconds
-
-const int sensorDelayTime1 = 2; //microseconds 
-
-const int sensorDelayTime2 = 10; //microseconds
-
-const int timeFactor = 1000; //milliseconds to seconds
-
-const int motorStop = 0; //motor speed stops
-
-const double distanceThreshold = 10; //distance is in cm
-
-const double durationToTime = 58.2;
-                      
-vexMotor RightMotor;  // creates an instance of the vexMotor class
-vexMotor LeftMotor;
-// create an instance for each motor that is connected
-// to your device.
-
-void setup()
-{
-  pinMode(trigPinLeft, OUTPUT);
-
-   pinMode(echoPinLeft, INPUT);
-  
-   pinMode(trigPinRight, OUTPUT);
-
-   pinMode(echoPinRight, INPUT);
-  
-   pinMode(trigPinFront, OUTPUT);
-
-   pinMode(echoPinFront, INPUT);
-  
-   pinMode(trigPinBack, OUTPUT);
-
-   pinMode(echoPinBack, INPUT);
-  RightMotor.attach(rightMotorPin); // setup / attach the vexMotor onto rightMotorPin
-  LeftMotor.attach(leftMotorPin);
-  Serial.begin(9600);    // starts the Serial communication on Arduino
-//sensor detection part of the code goes here
-}
- 
-void loop()
-{
-  double LeftSensorDistance;
-  double RightSensorDistance;
-  double FrontSensorDistance;
-  double BackSensorDistance;
-
-  FrontSensorDistance = SensorDistance(frontSensor);
-  if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
-  { 
-     Serial.print("move forward\n");
-     MoveForward();
-  }
-  else 
-  {
-     Serial.print("stop\n");
-     Stop();
-     Serial.print("turn left\n");
-     //TurnLeft();
-  }
-}
-
-void TurnRight() 
-{
-   RightMotor.write(motorSpeed);
-   LeftMotor.write(motorSpeed);
-   delay(timeFactor*motorDelayTime);
-}
-
-void TurnLeft() 
-{
-   RightMotor.write(-motorSpeed);
-   LeftMotor.write(-motorSpeed);
-   delay(timeFactor*motorDelayTime);
+   delay(motorDelayTimeTurn);
 }
 
 void MoveBack() 
