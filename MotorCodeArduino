@@ -87,6 +87,16 @@ void loop()
      Serial.print("turn left\n");
      TurnLeft();
   }
+  if (FrontSensorDistance > distanceThreshold)
+  {
+    MoveForward();
+  }
+  else
+  {
+    MoveBack();
+    TurnRight();
+  }
+  
 }
 
 void TurnRight() 
