@@ -142,6 +142,25 @@ void Stop()
    delay(timeFactor*motorDelayTime);
 }
 
+double SensorDistance(int SensorChoice)
+{
+  double duration, distance;
+  digitalWrite(trigPin, LOW);
+
+  delayMicroseconds(sensorDelayTime1);
+
+  digitalWrite(trigPin, HIGH);
+
+  delayMicroseconds(sensorDelayTime2);
+
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+
+  distance = duration/durationToTime;
+  return distance;
+}
+
 int SensorDistance(int sensorChoice)
 {
   int trigPin;
