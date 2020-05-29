@@ -5,10 +5,10 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
  RED (power)              VIN (Battery Power -- 5V works too, but won't be as strong or fast)
  BLACK (ground)           Ground (GND)                    
 */
-#define trigPinLeft 13
-#define echoPinLeft 12
 #define rightMotorPin 9
 #define leftMotorPin 10
+#define trigPinLeft 13
+#define echoPinLeft 12
 #define trigPinRight 8
 #define echoPinRight 7
 #define trigPinFront 6
@@ -142,21 +142,28 @@ void Stop()
    delay(timeFactor*motorDelayTime);
 }
 
-double SensorDistance(int SensorChoice)
+int SensorDistance(int sensorChoice)
 {
-  double duration, distance;
-  digitalWrite(trigPinFront, LOW);
-
-  delayMicroseconds(sensorDelayTime1);
-
-  digitalWrite(trigPinFront, HIGH);
-
-  delayMicroseconds(sensorDelayTime2);
-
-  digitalWrite(trigPinFront, LOW);
-
-  duration = pulseIn(echoPinFront, HIGH);
-
-  distance = duration/durationToTime;
-  return distance;
-} 
+  int trigPin;
+  int echoPin;
+  if (sensorChoice == frontSensor)
+  {
+    trigPin = trigPinFront;
+    echoPin = echoPinFront;
+  }
+  if (sensorChoice == backSensor)
+  {
+    trigPin = trigPinBack;
+    echoPin = echoPinBack; 
+  }
+  if (sensorChoice == leftSensor)
+  {
+    trigPin = trigPinLeft;
+    echoPin = echoPinLeft;
+  }
+  if (sensorChoice == rightSensor)
+  {
+    trigPin = trigPinRight;
+    echoPin = echoPinRight;
+  }
+}
