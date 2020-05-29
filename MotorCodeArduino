@@ -105,6 +105,7 @@ void loop()
   else
   {
     TurnRight();
+  }
 }
 
 void TurnRight() 
@@ -144,6 +145,7 @@ void Stop()
 
 double SensorDistance(int SensorChoice)
 {
+  double duration, distance;
   int trigPin;
   int echoPin;
   if (sensorChoice == frontSensor)
@@ -166,7 +168,6 @@ double SensorDistance(int SensorChoice)
     trigPin = trigPinRight;
     echoPin = echoPinRight;
   }
-  double duration, distance;
   digitalWrite(trigPin, LOW);
 
   delayMicroseconds(sensorDelayTime1);
