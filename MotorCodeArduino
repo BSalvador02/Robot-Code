@@ -74,7 +74,7 @@ void loop()
   double FrontSensorDistance;
   double BackSensorDistance;
 
-  F rontSensorDistance = SensorDistance(FrontSensor);
+  FrontSensorDistance = SensorDistance(FrontSensor);
   if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
   { 
      Serial.print("move forward\n");
@@ -98,13 +98,17 @@ void loop()
     TurnRight();
   }
   FrontSensorDistance = SensorDistance(FrontSensor);
+  BackSensorDistance = SensorDistance(BackSensor);
   if (FrontSensorDistance > distanceThreshold)
   {
     MoveForward();
   }
-  else
+  else if (BackSensorDistance > distanceThreshold)
   {
     MoveBack();
+  }
+  else
+  {
     TurnLeft();
   }
 }
