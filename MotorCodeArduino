@@ -19,7 +19,7 @@ MOTOR CONTROLLER 29  <-------->  ARDUINO
 #include "vexMotor.h" // includes the vexMotor library - uses Servo.h
                       // -- do not #include <Servo.h> 
 
-enum direction{leftSensor, rightSensor, frontSensor, backSensor};
+enum direction{FrontSensor, BackSensor, LeftSensor, RightSensor};
 
 const int motorSpeed = 100;
 
@@ -74,7 +74,7 @@ void loop()
   double FrontSensorDistance;
   double BackSensorDistance;
 
-  FrontSensorDistance = SensorDistance(frontSensor);
+  FrontSensorDistance = SensorDistance(FrontSensor);
   if (FrontSensorDistance > distanceThreshold) //distanceThreshold=sensor detection range
   { 
      Serial.print("move forward\n");
@@ -87,7 +87,7 @@ void loop()
      Serial.print("turn left\n");
      TurnLeft();
   }
-  FrontSensorDistance = SensorDistance(frontSensor);
+  FrontSensorDistance = SensorDistance(FrontSensor);
   if (FrontSensorDistance > distanceThreshold)
   {
     MoveForward();
@@ -95,15 +95,6 @@ void loop()
   else
   {
     MoveBack();
-    TurnRight();
-  }
-  FrontSensorDistance = SensorDistance(frontSensor);
-  if (FrontSensorDistance > distanceThreshold)
-  {
-    MoveForward();
-  }
-  else
-  {
     TurnRight();
   }
 }
@@ -148,22 +139,22 @@ double SensorDistance(int SensorChoice)
   double duration, distance;
   int trigPin;
   int echoPin;
-  if (sensorChoice == frontSensor)
+  if (SensorChoice == FrontSensor)
   {
     trigPin = trigPinFront;
     echoPin = echoPinFront;
   }
-  if (sensorChoice == backSensor)
+  if (SensorChoice == BackSensor)
   {
     trigPin = trigPinBack;
     echoPin = echoPinBack; 
   }
-  if (sensorChoice == leftSensor)
+  if (SensorChoice == LeftSensor)
   {
     trigPin = trigPinLeft;
     echoPin = echoPinLeft;
   }
-  if (sensorChoice == rightSensor)
+  if (SensorChoice == RightSensor)
   {
     trigPin = trigPinRight;
     echoPin = echoPinRight;
